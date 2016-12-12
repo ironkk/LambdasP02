@@ -109,12 +109,15 @@ public class MainLOL extends EstadisticasLOL {
   public static void mostrarDatos(List<ObjetosLOL> objetosLOL, List <checkEstadistica> comprueba) {
 
         for (ObjetosLOL o : objetosLOL) {
-            if ((comprueba.c) == true) {
+            for(checkEstadistica c : comprueba){
+            if ((c.check(o)) == true) {
                 System.out.println(o);
+            }
             }
         }
 
     }
+  
 // Java 8 in action pag 70
     @FunctionalInterface
     public interface Predicate<T> {
