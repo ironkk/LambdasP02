@@ -5,12 +5,12 @@
  */
 package p02_lambdas.LOL;
 
+import p02_lambdas.*;
+
 /**
  *
  * @author dam
  */
-public interface checkEstadistica {
-    public boolean check(ObjetosLOL l);
-    
-
+public interface IreadNumero {
+       public Integer readNumber (int numero3);
 }

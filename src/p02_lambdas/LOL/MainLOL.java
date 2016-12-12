@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+< * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -7,26 +7,28 @@ package p02_lambdas.LOL;
 
 import java.util.ArrayList;
 import java.util.List;
-import p02_lambdas.Animal;
-import p02_lambdas.CheckTrait;
-import static p02_lambdas.LambdasZooList.showCheckTraits;
+
+import static p02_lambdas.LOL.Entrada.pedirCadena;
 
 /**
  *
- * @author dam
+ * @author ironkk
  */
-public class MainLOL {
+public class MainLOL extends EstadisticasLOL {
+
+    private static PersonajeLOL listaLOL = new PersonajeLOL();
+    private static ObjetosLOL misObjetosLOL = new ObjetosLOL();
 
     public static void main(String[] args) {
 
         // Creamos Array
-        List<LOL> misLOL = new ArrayList<>(4);
+        List<PersonajeLOL> misLOL = new ArrayList<>(4);
 
-        // Creamos Objetos
-        LOL fizz = new LOL(8, 5, 22, 18, 2, 7, 9, 9);
-        LOL aatrox = new LOL(10, 2, 15, 34, 22, 14, 2, 3);
-        LOL azir = new LOL(6, 2, 3, 1, 4, 88, 11, 2);
-        LOL xin = new LOL(88, 12, 3, 15, 2, 14, 1, 2);
+        // Creamos Objetos P
+        PersonajeLOL fizz = new PersonajeLOL(8, 5, 22, 18, 2, 7, 9, 9);
+        PersonajeLOL aatrox = new PersonajeLOL(10, 2, 15, 34, 22, 14, 2, 3);
+        PersonajeLOL azir = new PersonajeLOL(6, 2, 3, 1, 4, 88, 11, 2);
+        PersonajeLOL xin = new PersonajeLOL(88, 12, 3, 15, 2, 14, 1, 2);
 
         // Añadimos Objetos en la Array
         misLOL.add(fizz);
@@ -34,105 +36,123 @@ public class MainLOL {
         misLOL.add(azir);
         misLOL.add(xin);
 
-        //Lambdas
-        checkEstadistica lambdaModificaVida = (LOL l) -> {
+        List<ObjetosLOL> objetosLOL = new ArrayList<>();
 
+        ObjetosLOL e1 = new ObjetosLOL(0, 20, 30, 20, 0, 40, 30, 50, "e1");
+        ObjetosLOL e2 = new ObjetosLOL(800, 50, 0, 50, 80, 20, 50, 10, "e2");
+        ObjetosLOL e3 = new ObjetosLOL(100, 0, 40, 100, 0, 70, 35, 0, "e3");
+        ObjetosLOL e4 = new ObjetosLOL(300, 80, 35, 70, 10, 0, 60, 30, "e4");
+
+        List<checkEstadistica> comprueba = new ArrayList<>();
+
+        checkEstadistica modVida = (l) -> {
             return l.modificaVida();
         };
-
-        checkEstadistica lambdaModificaDaño = (LOL l) -> {
-
+        checkEstadistica modAtaque = (l) -> {
             return l.modificaAtaque();
         };
-
-        checkEstadistica lambdaModificaVelocidadAtaque = (LOL l) -> {
-
-            return l.modificaVelocidadAtaque();
-        };
-
-        checkEstadistica lambdaModificaVelocidadMovimiento = (LOL l) -> {
-
+        checkEstadistica modMovimiento = (l) -> {
             return l.modificaMovimiento();
         };
-
-        checkEstadistica lambdaModificaRegeneracionVida = (LOL l) -> {
-
+        checkEstadistica modRegenera = (l) -> {
             return l.modificaRegeneraVida();
         };
-
-        checkEstadistica lambdaModificaArmadura = (LOL l) -> {
-
+        checkEstadistica modArmadura = (l) -> {
             return l.modificaArmadura();
         };
-
-        checkEstadistica lambdaModificaResistenciaMágica = (LOL l) -> {
-
+        checkEstadistica modResistencia = (l) -> {
             return l.modificaResistenciaMagica();
         };
-
-        checkEstadistica lambdaModificaMana = (LOL l) -> {
-
+        checkEstadistica modMana = (l) -> {
             return l.modificaMana();
         };
 
-        // Lista de la interfaz
-        List<checkEstadistica> checks = new ArrayList<>();
-        checks.add(lambdaModificaVida);
-        checks.add(lambdaModificaArmadura);
-        checks.add(lambdaModificaResistenciaMágica);
-        checks.add(lambdaModificaMana);
-        checks.add(lambdaModificaVelocidadMovimiento);
-        checks.add(lambdaModificaVelocidadAtaque);
-        checks.add(lambdaModificaDaño);
+        mostrarDatos(objetosLOL, comprueba);
 
-        showComprueba(misLOL, checks);
+        switch (mostrarMenu()) {
+            case 1:
+                CrearyBorrarPersonajes();
+                break;
+            case 2:
+                CrearyBorrarObjetos();
+                break;
+            case 3:
+                misObjetosLOL.borrarObjetoLOL();
+                break;
+            case 4:
+                System.out.println("Adiós!");
+                System.exit(0);
+                break;
 
-    }
+            default:
+                System.out.println("Opción incorrecta.");
+                System.exit(0);
 
-    /*   private int Vida;
-    private int DañoAtaque;
-    private int VelocidadAtaque;
-    private int VelocidadMovimiento;
-    private int RegeneracionVida;
-    private int Armadura;
-    private int ResistenciaMagica;
-    private int Mana;
-     */
-    public static void showComprueba(List<LOL> misLOL, List<checkEstadistica> checks) {
-        misLOL.forEach(lol -> {
-            checks.forEach(check -> System.out.println(check.comprueba(lol)));
-
-        });
-
-        try {
-            System.out.println("¿Quieres añadir un personaje de LOL?");
-            String respuesta = "";
-            if (respuesta.equalsIgnoreCase("SI")) {
-                System.out.println("¿Nombre?");
-                System.out.println("¿Daño Ataque?");
-                System.out.println("¿Velocidad Ataque?");
-                System.out.println("¿Velocidad Movimiento?");
-                System.out.println("Regeneracion Vida?");
-                System.out.println("¿Armadura?");
-                System.out.println("¿Resistencia Magica?");
-                System.out.println("¿Mana?");
-                
-                
-
-            } else {
-
-            }
-
-            System.out.println("¿Quieres borrar un personaje de LOL?");
-
-        } catch (Exception e) {
-            System.out.println(e);
         }
-        /*
-   	Permeti que l’usuari es pugui afegir i treure objectes
-	Permeti que l’usuari pugui veure les seves estadístiques segons els objectes equipats.
-         */
+    }
+
+    private static int mostrarMenu() {
+        int opcion = Entrada.pedirEntero("Escoge una opción");
+        do {
+
+            System.out.println("*** LOL ***");
+            System.out.println("1. Crear o Borrar Personaje LOL");
+            System.out.println("2. Crear o Borrar a un Personaje el Objeto LOL");
+            System.out.println("3. comprobar");
+            System.out.println("4. Salir");
+
+        } while (opcion != 0);
+        return opcion;
+    }
+
+    
+  public static void mostrarDatos(List<ObjetosLOL> objetosLOL, List <checkEstadistica> comprueba) {
+
+        for (ObjetosLOL o : objetosLOL) {
+            if ((comprueba.c) == true) {
+                System.out.println(o);
+            }
+        }
+
+    }
+// Java 8 in action pag 70
+    @FunctionalInterface
+    public interface Predicate<T> {
+
+        boolean test(T t);
+    }
+
+    public static <T> List<PersonajeLOL> filter(List<PersonajeLOL> misLOL, Predicate<T> p) {
+        List<T> results = new ArrayList<>();
+
+        for (PersonajeLOL s : misLOL) {
+            if (p.test((T) s)) {
+                results.add((T) s);
+            }
+        }
+        return (List<PersonajeLOL>) results;
+    }
+
+    public static void CrearyBorrarPersonajes() {
+        String respuesta = pedirCadena("¿Quieres añadir o borrar un Personaje? Añadir/Borrar");
+        if (respuesta.equalsIgnoreCase("AÑADIR")) {
+            PersonajeLOL.crearPersonajes(listaLOL);
+
+        } else if (respuesta.equalsIgnoreCase("BORRAR")) {
+            PersonajeLOL.borrarPersonajes((List<PersonajeLOL>) listaLOL);
+        }
 
     }
 
+    public static void CrearyBorrarObjetos() {
+        String respuesta = pedirCadena("¿Quieres añadir o borrar un Objeto? Añadir/Borrar");
+        if (respuesta.equalsIgnoreCase("AÑADIR")) {
+
+        } else if (respuesta.equalsIgnoreCase("BORRAR")) {
+
+        }
+
+    }
 }
+ 
+

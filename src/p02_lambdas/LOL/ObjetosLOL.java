@@ -5,13 +5,15 @@
  */
 package p02_lambdas.LOL;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 /**
  *
  * @author dam
  */
-public class LOL{
-
-    private int Vida;
+public class ObjetosLOL {
+       private int Vida;
     private int DañoAtaque;
     private int VelocidadAtaque;
     private int VelocidadMovimiento;
@@ -19,6 +21,15 @@ public class LOL{
     private int Armadura;
     private int ResistenciaMagica;
     private int Mana;
+    private String nombre;
+    
+   private ArrayList<PersonajeLOL> listaLOL;
+
+      private ArrayList<ObjetosLOL> misObjetosLOL;
+    public void alta(PersonajeLOL l) {
+        listaLOL.add(listaLOL.size(), l);
+
+    }
 
     public int getVida() {
         return Vida;
@@ -84,23 +95,32 @@ public class LOL{
         this.Mana = Mana;
     }
 
-    public LOL(int Vida, int DañoAtaque, int VelocidadAtaque, int VelocidadMovimiento, int RegeneracionVida, int Armadura, int ResistenciaMagica, int Mana) {
-        this.Vida = 0;
-        this.DañoAtaque = 0;
-        this.VelocidadAtaque = 0;
-        this.VelocidadMovimiento = 0;
-        this.RegeneracionVida = 0;
-        this.Armadura = 0;
-        this.ResistenciaMagica = 0;
-        this.Mana = 0;
+    public String getNombre() {
+        return nombre;
     }
 
-    public LOL() {
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ObjetosLOL() {
+    }
+
+    public ObjetosLOL(int Vida, int DañoAtaque, int VelocidadAtaque, int VelocidadMovimiento, int RegeneracionVida, int Armadura, int ResistenciaMagica, int Mana, String nombre) {
+        this.Vida = Vida;
+        this.DañoAtaque = DañoAtaque;
+        this.VelocidadAtaque = VelocidadAtaque;
+        this.VelocidadMovimiento = VelocidadMovimiento;
+        this.RegeneracionVida = RegeneracionVida;
+        this.Armadura = Armadura;
+        this.ResistenciaMagica = ResistenciaMagica;
+        this.Mana = Mana;
+        this.nombre = nombre;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
         hash = 97 * hash + this.Vida;
         hash = 97 * hash + this.DañoAtaque;
         hash = 97 * hash + this.VelocidadAtaque;
@@ -109,6 +129,7 @@ public class LOL{
         hash = 97 * hash + this.Armadura;
         hash = 97 * hash + this.ResistenciaMagica;
         hash = 97 * hash + this.Mana;
+        hash = 97 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
 
@@ -123,7 +144,7 @@ public class LOL{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final LOL other = (LOL) obj;
+        final ObjetosLOL other = (ObjetosLOL) obj;
         if (this.Vida != other.Vida) {
             return false;
         }
@@ -148,10 +169,18 @@ public class LOL{
         if (this.Mana != other.Mana) {
             return false;
         }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
         return true;
     }
 
-    public boolean modificaVida() {
+       public void alta(ObjetosLOL l) {
+         misObjetosLOL.add(misObjetosLOL.size(), l);
+
+    }
+       
+         public boolean modificaVida() {
         if (this.getVida() == 0) {
             return false;
 
@@ -160,13 +189,13 @@ public class LOL{
 
         }
     }
-    
+
     public boolean modificaAtaque() {
         if (this.getDañoAtaque() == 0) {
             return false;
 
         } else {
-            return false;
+            return true;
 
         }
     }
@@ -180,8 +209,8 @@ public class LOL{
 
         }
     }
-    
-      public boolean modificaVelocidadAtaque() {
+
+    public boolean modificaVelocidadAtaque() {
         if (this.getVelocidadAtaque() == 0) {
             return false;
 
@@ -190,7 +219,6 @@ public class LOL{
 
         }
     }
-    
 
     public boolean modificaRegeneraVida() {
         if (this.getRegeneracionVida() == 0) {
@@ -231,12 +259,11 @@ public class LOL{
 
         }
     }
-
     @Override
     public String toString() {
-        return "LOL{" + "Vida=" + Vida + ", Da\u00f1oAtaque=" + DañoAtaque + ", VelocidadAtaque=" + VelocidadAtaque + ", VelocidadMovimiento=" + VelocidadMovimiento + ", RegeneracionVida=" + RegeneracionVida + ", Armadura=" + Armadura + ", ResistenciaMagica=" + ResistenciaMagica + ", Mana=" + Mana + '}';
+        return "ObjetosLOL{" + "Vida=" + Vida + ", Da\u00f1oAtaque=" + DañoAtaque + ", VelocidadAtaque=" + VelocidadAtaque + ", VelocidadMovimiento=" + VelocidadMovimiento + ", RegeneracionVida=" + RegeneracionVida + ", Armadura=" + Armadura + ", ResistenciaMagica=" + ResistenciaMagica + ", Mana=" + Mana + ", nombre=" + nombre + '}';
     }
 
- 
-
+    
+    
 }

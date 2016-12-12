@@ -40,7 +40,7 @@ public class EjemploLambdas {
                     System.out.println("Numero ?");
 
                     int numero = Integer.parseInt(br.readLine());
-                    return numero3;
+                    return numero;
                 } catch (Exception e) {
                     System.out.println(e);
                 }
