@@ -25,7 +25,8 @@ public class ObjetosLOL {
     
    private ArrayList<PersonajeLOL> listaLOL;
 
-      private ArrayList<ObjetosLOL> misObjetosLOL;
+   ArrayList<ObjetosLOL> misObjetosLOL= new ArrayList <>();
+      
     public void alta(PersonajeLOL l) {
         listaLOL.add(listaLOL.size(), l);
 

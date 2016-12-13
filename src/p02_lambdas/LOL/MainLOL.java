@@ -17,17 +17,17 @@ import static p02_lambdas.LOL.Entrada.pedirCadena;
 public class MainLOL {
     
     private static PersonajeLOL listaLOL = new PersonajeLOL();
-    private static EstadisticasLOL misObjetosLOL = new EstadisticasLOL();
+    private static PersonajeLOL misObjetosLOL = new PersonajeLOL();
     
     public static void main(String[] args) {
 
         // Añadimos objetos LOL        
-        EstadisticasLOL o1 = new EstadisticasLOL(0, 20, 30, 20, 10, 40, 30, 50, "o1");
-        EstadisticasLOL o2 = new EstadisticasLOL(800, 50, 0, 30, 80, 20, 50, 50, "o2");
-        EstadisticasLOL o3 = new EstadisticasLOL(100, 0, 40, 500, 0, 70, 35, 67, "o3");
-        EstadisticasLOL o4 = new EstadisticasLOL(300, 80, 35, 20, 10, 0, 60, 30, "o4");
+        ObjetosLOL o1 = new ObjetosLOL(0, 20, 30, 20, 10, 40, 30, 50, "o1");
+        ObjetosLOL o2 = new ObjetosLOL(800, 50, 0, 30, 80, 20, 50, 50, "o2");
+        ObjetosLOL o3 = new ObjetosLOL(100, 0, 40, 500, 0, 70, 35, 67, "o3");
+        ObjetosLOL o4 = new ObjetosLOL(300, 80, 35, 20, 10, 0, 60, 30, "o4");
         
-       List<EstadisticasLOL> objetosLOL = new ArrayList<>();
+       List<ObjetosLOL> objetosLOL = new ArrayList<>();
         objetosLOL.add(o1);
         objetosLOL.add(o2);
         objetosLOL.add(o3);
@@ -180,7 +180,7 @@ public class MainLOL {
     public static void CrearyBorrarPersonajes() {
         String respuesta = pedirCadena("¿Quieres añadir o borrar un Personaje? Añadir/Borrar");
         if (respuesta.equalsIgnoreCase("AÑADIR")) {
-            listaLOL.crearPersonajes(listaLOL);
+            listaLOL.crearPersonajes();
             
         } else if (respuesta.equalsIgnoreCase("BORRAR")) {
             listaLOL.borrarPersonajes();
@@ -191,10 +191,10 @@ public class MainLOL {
     public static void CrearyBorrarObjetos() {
         String respuesta = pedirCadena("¿Quieres añadir o borrar un Objeto? Añadir/Borrar");
         if (respuesta.equalsIgnoreCase("AÑADIR")) {
-            listaLOL.crearObjetoLOL(misObjetosLOL);
+            misObjetosLOL.crearObjetoLOL2();
             
         } else if (respuesta.equalsIgnoreCase("BORRAR")) {
-            listaLOL.borrarObjetoLOL(misObjetosLOL);
+            listaLOL.borrarObjetoLOL2();
         }
         
     }

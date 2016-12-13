@@ -47,8 +47,9 @@ public class EstadisticasLOL implements checkEstadistica {
         return misObjetosLOL;
     }
 
+
     @Override
-    public boolean comprueba(ObjetosLOL l) {
+    public boolean check(ObjetosLOL l) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
