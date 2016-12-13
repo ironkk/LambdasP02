@@ -26,16 +26,15 @@ public class PersonajeLOL {
     private int Armadura;
     private int ResistenciaMagica;
     private int Mana;
-    private ArrayList<PersonajeLOL> listaLOL;
-
-    private ArrayList<ObjetosLOL> misObjetosLOL;
+    private List<PersonajeLOL> listaLOL;
+    private List<EstadisticasLOL> misObjetosLOL;
 
     public void alta(PersonajeLOL l) {
         listaLOL.add(listaLOL.size(), l);
 
     }
 
-    public void alta2(ObjetosLOL l) {
+    public void alta2(EstadisticasLOL l) {
         misObjetosLOL.add(misObjetosLOL.size(), l);
 
     }
@@ -105,6 +104,19 @@ public class PersonajeLOL {
     }
 
     public PersonajeLOL(int Vida, int DañoAtaque, int VelocidadAtaque, int VelocidadMovimiento, int RegeneracionVida, int Armadura, int ResistenciaMagica, int Mana) {
+        this.Vida = Vida;
+        this.DañoAtaque = DañoAtaque;
+        this.VelocidadAtaque = VelocidadAtaque;
+        this.VelocidadMovimiento = VelocidadMovimiento;
+        this.RegeneracionVida = RegeneracionVida;
+        this.Armadura = Armadura;
+        this.ResistenciaMagica = ResistenciaMagica;
+        this.Mana = Mana;
+        this.misObjetosLOL = misObjetosLOL;
+    }
+
+
+    public PersonajeLOL() {
         this.Vida = 0;
         this.DañoAtaque = 0;
         this.VelocidadAtaque = 0;
@@ -113,9 +125,7 @@ public class PersonajeLOL {
         this.Armadura = 0;
         this.ResistenciaMagica = 0;
         this.Mana = 0;
-    }
-
-    public PersonajeLOL() {
+        this.misObjetosLOL = new ArrayList<EstadisticasLOL>();
     }
 
     @Override
@@ -171,16 +181,15 @@ public class PersonajeLOL {
         return true;
     }
 
-
     @Override
     public String toString() {
         return "LOL{" + "Vida=" + Vida + ", Da\u00f1oAtaque=" + DañoAtaque + ", VelocidadAtaque=" + VelocidadAtaque + ", VelocidadMovimiento=" + VelocidadMovimiento + ", RegeneracionVida=" + RegeneracionVida + ", Armadura=" + Armadura + ", ResistenciaMagica=" + ResistenciaMagica + ", Mana=" + Mana + '}';
     }
 
-    
     /// CREAR PERSONAJE
-    public static void crearPersonajes(PersonajeLOL listaLOL) {
+    public void crearPersonajes(PersonajeLOL listaLOL) {
         try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String respuesta;
             respuesta = pedirCadena("¿Quieres añadir un Personaje? SI/NO");
 
@@ -209,7 +218,7 @@ public class PersonajeLOL {
 
                 int mana;
                 mana = pedirEntero("¿Mana?");
-
+                
                 PersonajeLOL l = new PersonajeLOL(vida, dañoAtaque, velocidadAtaque, velocidadMovimiento, regeneracionVida, armadura, resistenciaMagica, mana);
 
                 listaLOL.alta(l);
@@ -226,18 +235,17 @@ public class PersonajeLOL {
         }
 
     }
-    
+
     // BORRAR PERSONAJE
-     public static void borrarPersonajes(List<PersonajeLOL>listaLOL) {
+    public void borrarPersonajes() {
         int contador = 0;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(listaLOL.size());
 
         do {
             try {
-                for (PersonajeLOL ls : listaLOL) {
+                 for (int i = 0; i < listaLOL.size(); i++) {
                     contador++;
-                    System.out.println(contador + " Armadura: " + ls.getArmadura() + " Ataque: " + ls.getDañoAtaque() + " Mana: " + ls.getMana() + " Velocidad Ataque: " + ls.getVelocidadAtaque());
+                    System.out.println(contador +  "" + listaLOL.toString());
                 }
                 System.out.println("¿Qué número de LOL deseas eliminar?");
                 int numero = Integer.parseInt(br.readLine());
@@ -250,81 +258,52 @@ public class PersonajeLOL {
                 } else if (seguro.equalsIgnoreCase("NO")) {
                     System.out.println("Te has quedado sin eliminar ese numero");
                 }
-
-                System.out.println("¿Quieres eliminar otro numero asociado a LOL? SI/NO?");
-                String seguro2 = br.readLine();
-                if (seguro2.equalsIgnoreCase("SI")) {
-
-                    for (PersonajeLOL ls : listaLOL) {
-                        contador++;
-                        System.out.println(contador + " Armadura: " + ls.getArmadura() + " Ataque: " + ls.getDañoAtaque() + " Mana: " + ls.getMana() + " Velocidad Ataque: " + ls.getVelocidadAtaque());
-                    }
-                    System.out.println("¿Qué número de LOL deseas eliminar?");
-                    int numero2 = Integer.parseInt(br.readLine());
-                    System.out.println("Deseas eliminar el número: " + numero2);
-
-                    listaLOL.remove(numero2);
-
-                } else if (seguro2.equalsIgnoreCase("NO")) {
-                    System.out.println("Esta vez te has quedado sin eliminar ninguno");
-                }
-
             } catch (Exception e) {
                 System.out.println(e);
 
             }
         } while (true);
     }
-    
-    public void addObjetoLOL(ObjetosLOL objeto) {
 
-        
-        this.Armadura = this.Armadura + objeto.getArmadura();
-        this.DañoAtaque = this.DañoAtaque + objeto.getDañoAtaque();
-        
+  public void calcularEstadisticasPersonaje() {
+        for (EstadisticasLOL o : misObjetosLOL) {
+            this.Mana += o.getMana();
+            this.Vida += o.getVida();
+            this.Armadura += o.getArmadura();
+            this.DañoAtaque += o.getAtaque();
+            this.VelocidadAtaque += o.getVelocidadAtaque();
+            this.VelocidadMovimiento += o.getVelocidadMovimiento();
+            this.RegeneracionVida += o.getRegeneracionDeVida();
 
-    }
-    
-      public void borrarObjetoLOL(){
-          int
-        contador = 0;
-       for(ObjetosLOL l : misObjetosLOL){
-           contador++;
-         System.out.println(contador +"Nombre :" +l.getNombre() + " Armadura: " + l.getArmadura() + " Ataque: " + l.getDañoAtaque() + " Mana: " + l.getMana() + " Velocidad Ataque: " + l.getVelocidadAtaque());
-           
-       }
-       int borrarObjeto;
-       borrarObjeto = pedirEntero("¿Qué objeto quieres borrar?");
-       misObjetosLOL.remove(borrarObjeto);
-        
-    }
-      
- // Añadir Objeto a Personaje Tiene que ejecutarse     
-    public void añadirObjetoAPersonaje(){  
-        
-      int contador = 0;    
-        for(PersonajeLOL l : listaLOL){
-            contador++;
-       System.out.println(contador + " Armadura: " + l.getArmadura() + " Ataque: " + l.getDañoAtaque() + " Mana: " + l.getMana() + " Velocidad Ataque: " + l.getVelocidadAtaque());
-        
+            this.ResistenciaMagica += o.getResistenciaMagica();
+
         }
-        int personajeSeleccionado;
-        personajeSeleccionado = pedirEntero("¿A cual quieres añadirle un objeto?");
-        
-        
-        contador = 0;
-        for(ObjetosLOL l : misObjetosLOL){
-            contador++;
-            System.out.println(contador +"Nombre :" +l.getNombre() + " Armadura: " + l.getArmadura() + " Ataque: " + l.getDañoAtaque() + " Mana: " + l.getMana() + " Velocidad Ataque: " + l.getVelocidadAtaque());
-        }
-         int objetoAñadir;
-          objetoAñadir = pedirEntero("¿Qué número de objeto quieres añadir?");
-listaLOL.get(personajeSeleccionado).addObjetoLOL(misObjetosLOL.get(objetoAñadir));
-          
+        System.out.println("Mana: " + this.Mana);
+        System.out.println("Vida: " + this.Vida);
+        System.out.println("Armadura: " + this.Armadura);
+        System.out.println("Ataque: " + this.DañoAtaque);
+        System.out.println("Velocidad ataque: " + this.VelocidadAtaque);
+        System.out.println("Velocidad Movimiento: " + this.VelocidadMovimiento);
+        System.out.println("Regeneracion de vida: " + this.RegeneracionVida);
+
+        System.out.println("Resistencia Magica: " + this.ResistenciaMagica);
 
     }
-    
- 
-   
+  
+    public void crearObjetoLOL(EstadisticasLOL o) {
+        misObjetosLOL.add(o);
+    }
 
+    
+    public void borrarObjetoLOL(EstadisticasLOL o){
+        for (int i = 0; i < misObjetosLOL.size(); i++) {
+            if (misObjetosLOL.get(i).getNombre().equals(o.getNombre())){
+                misObjetosLOL.remove(i);
+            }
+        }
+    }
+
+    private void remove(int numero) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
