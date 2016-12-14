@@ -274,10 +274,10 @@ public class PersonajeLOL {
 
         do {
             try {
-                // JAVA NULL POINTER
+                // NO SE MUESTRA!
                 for (PersonajeLOL l : listaLOL){
                     contador++;
-                    System.out.println(contador + "Nombre" + l.getNombre());
+                    System.out.println(contador + "Nombre" + l.toString());
                 }
                 System.out.println("¿Qué número de LOL deseas eliminar?");
                 int numero = Integer.parseInt(br.readLine());
@@ -368,10 +368,10 @@ public class PersonajeLOL {
 
                 System.out.println("Objeto Creado y añadadido a la Lista de Objetos");
 
-                // JAVA NULL POINTER
+                // NO 
                 for (PersonajeLOL p : listaLOL) {
                     contador++;
-                    System.out.println(contador + "Nombre Personaje" + p.getNombre());
+                    System.out.println(contador + "Nombre Personaje" + p.toString());
                 }
 
                 System.out.println("¿Qué número de Personaje quieres añadir un Objeto de LOL?");
